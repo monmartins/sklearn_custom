@@ -22,7 +22,7 @@ class RemoveZerosRows(BaseEstimator, TransformerMixin):
         
         return data
 
-class LabelEncoderCustom(BaseEstimator, TransformerMixin):
+class LabelEncoderColumns(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
         # self.label = preprocessing.LabelEncoder()
