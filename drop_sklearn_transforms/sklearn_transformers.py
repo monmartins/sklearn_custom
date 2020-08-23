@@ -25,7 +25,7 @@ class RemoveZerosRows(BaseEstimator, TransformerMixin):
 class LabelEncoderCustom(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
-        self.label = preprocessing.LabelEncoder()
+        # self.label = preprocessing.LabelEncoder()
         self.encode = True
 
     def fit(self, X, y=None):
@@ -34,12 +34,12 @@ class LabelEncoderCustom(BaseEstimator, TransformerMixin):
     def transform(self, X):
         # Primeiro realizamos a cópia do dataframe 'X' de entrada
         data = X.copy()
-        if(self.encode == True):
-            data[self.columns] = self.label.fit_transform(data[self.columns])
-            self.encode = False
-        else:
-            data[self.columns] = self.label.inverse_transform(data[self.columns])
-            self.encode = True
+        # if(self.encode == True):
+        #     data[self.columns] = self.label.fit_transform(data[self.columns])
+        #     self.encode = False
+        # else:
+        #     data[self.columns] = self.label.inverse_transform(data[self.columns])
+        #     self.encode = True
         return data
 
 # All sklearn Transforms must have the `transform` and `fit` methods
