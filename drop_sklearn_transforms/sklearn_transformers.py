@@ -26,7 +26,7 @@ class LabelEncoderColumns(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
         self.columns = columns
         # self.label = preprocessing.LabelEncoder()
-        self.encode = True
+        # self.encode = True
 
     def fit(self, X, y=None):
         return self
