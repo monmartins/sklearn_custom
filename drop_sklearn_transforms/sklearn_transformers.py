@@ -36,7 +36,7 @@ class LabelEncoderColumns(BaseEstimator, TransformerMixin):
         # Primeiro realizamos a cópia do dataframe 'X' de entrada
         data = X.copy()
         if(self.encode == True):
-            data[self.columns] = self.label.fit_transform(data[self.columns])
+            data[self.columns] = self.label.fit_transform(data[self.columns].values.ravel())
             self.encode = False
         else:
             data[self.columns] = self.label.inverse_transform(data[self.columns])
@@ -57,7 +57,7 @@ class RandomForestRegressorCustom(BaseEstimator, TransformerMixin):
             y2_train = self.label.fit_transform(y) 
         else:
             y2_train = self.label.fit_transform(X[self.columns]) 
-            
+
         self.regr.fit(X,y2_train)
         return self.regr
     
