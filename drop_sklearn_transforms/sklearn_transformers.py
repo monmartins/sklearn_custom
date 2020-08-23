@@ -23,7 +23,7 @@ class RemoveZerosRows(BaseEstimator, TransformerMixin):
         
         return data
 
-class RandomForestRegressorCustom(BaseEstimator, TransformerMixin):
+class RandomForestRegressorCustom(RandomForestRegressor):
     def __init__(self, max_depth=5, random_state=0):
         self.max_depth = max_depth
         self.random_state = random_state
@@ -43,6 +43,7 @@ class RandomForestRegressorCustom(BaseEstimator, TransformerMixin):
         data = X.copy()
         
         return data
+
     def predict(self, X):
         y_pred = self.regr.predict(X)
         return self.label.inverse_transform(y_pred)
