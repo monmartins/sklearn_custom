@@ -1,6 +1,5 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn import preprocessing
-from sklearn.ensemble import RandomForestRegressor
 
 class RemoveZerosRows(BaseEstimator, TransformerMixin):
     def __init__(self, columns):
@@ -23,30 +22,25 @@ class RemoveZerosRows(BaseEstimator, TransformerMixin):
         
         return data
 
-class RandomForestRegressorCustom(RandomForestRegressor):
-    def __init__(self, max_depth=5, random_state=0):
-        self.max_depth = max_depth
-        self.random_state = random_state
-        self.label = preprocessing.LabelEncoder() 
-        self.regr = RandomForestRegressor(self.max_depth, self.random_state)
+class LabelEncoderCustom(BaseEstimator, TransformerMixin):
+    def __init__(self, columns):
+        self.columns = columns
+        self.label = preprocessing.LabelEncoder()
+        self.encode = True
 
     def fit(self, X, y=None):
-        
-        if y != None:
-            y2_train = self.label.fit_transform(y) 
-            
-        self.regr.fit(X,y2_train)
-        return self.regr
+        return self
     
     def transform(self, X):
         # Primeiro realizamos a cópia do dataframe 'X' de entrada
         data = X.copy()
-        
+        if(self.encode == True):
+            data[self.columns] = self.label.fit_transform(data[self.columns])
+            self.encode = False
+        else:
+            data[self.columns] = self.label.inverse_transform(data[self.columns])
+            self.encode = True
         return data
-
-    def predict(self, X):
-        y_pred = self.regr.predict(X)
-        return self.label.inverse_transform(y_pred)
 
 # All sklearn Transforms must have the `transform` and `fit` methods
 class DropColumns(BaseEstimator, TransformerMixin):
