@@ -7,8 +7,8 @@ This Python package encapsulates custom sklearn pipeline transforms for use with
 
 ## Installation
 
-        git clone https://github.com/vnderlev/sklearn_transforms.git
-        cd sklearn_transforms
+        git clone https://github.com/monmartins/sklearn_custom
+        cd sklearn_custom
         ls -ltr
         zip -r sklearn_transforms.zip sklearn_transforms
         pip install sklearn_transforms.zip
