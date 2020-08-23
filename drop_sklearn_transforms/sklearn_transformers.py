@@ -17,6 +17,9 @@ class RemoveZerosRows(BaseEstimator, TransformerMixin):
         
         data = data[data[self.columns] != 0]
         data[ignoredColumns] = data_ignored
+
+        for i in self.columns:
+            data[i] = data[i].dropna()
         
         return data
 
